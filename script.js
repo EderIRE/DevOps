@@ -1,5 +1,6 @@
 let nav = 0;
 let clicked = null;
+
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
 const calendar = document.getElementById('calendar');
@@ -15,20 +16,8 @@ function openModal(date) {
   const eventForDay = events.find((e) => e.date === clicked);
 
   if (eventForDay) {
-    let inputEvent = document.getElementById('eventText');
-    let addEvent = document.createElement('p');
-    addEvent.appendChild(document.createTextNode(`${eventForDay.title} - ${eventForDay.date}`));
-
-    inputEvent.appendChild(addEvent);
-
-    let newBtn = document.getElementById('deleteButton');
-    inputEvent.appendChild(newBtn);
-    newBtn.addEventListener('click', deleteEvent);
-    inputEvent.addEventListener('click', deleteEvent);
-
+    document.getElementById('eventText').innerText = `${eventForDay.title}`;
     deleteEventModal.style.display = 'block';
-    newEventModal.style.display = 'block';
-    newEventModal.style.top = '330px';
   } else {
     newEventModal.style.display = 'block';
   }
